@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodapp/components/food_card.dart';
+import 'package:foodapp/providers/main_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,12 +17,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Food App'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("Test"),
-          SizedBox(height: 8.h),
-          const FoodCard(),
+          Center(
+            child: FoodCard(
+              mealModel: context.watch<MainProvider>().mealModels[0],
+            ),
+          ),
         ],
       ),
     );
