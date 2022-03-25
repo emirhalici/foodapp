@@ -19,16 +19,18 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Food App'),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: FoodCard(
-              mealModel: context.watch<MainProvider>().mealModels[0],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+              child: FoodCard(
+                mealModel: context.watch<MainProvider>().mealModels[0],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
