@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:foodapp/models/category_model.dart';
 import 'package:foodapp/models/ingredient_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,7 +13,7 @@ class ApiHelper {
     var url = Uri.parse(urlString);
     http.Response response = await http.get(url);
     if (response.statusCode != 200) {
-      throw 'Response not found';
+      throw 'Response not found, status code: ${response.statusCode}';
     }
 
     try {
@@ -61,7 +62,7 @@ class ApiHelper {
     var url = Uri.parse(urlString);
     http.Response response = await http.get(url);
     if (response.statusCode != 200) {
-      throw 'Response not found';
+      throw 'Response not found, status code: ${response.statusCode}';
     }
 
     try {
@@ -79,7 +80,35 @@ class ApiHelper {
       }
       return list;
     } catch (e) {
-      throw 'Error while decoding response';
+      throw 'Error while decoding response: ${e.toString()}';
+    }
+  }
+
+  Future<List<CategoryModel>> getAllCategories() async {
+    String urlString = 'https://www.themealdb.com/api/json/v1/$key/categories.php';
+    var url = Uri.parse(urlString);
+    http.Response response = await http.get(url);
+
+    if (response.statusCode != 200) {
+      throw 'Response not found, status code: ${response.statusCode}';
+    }
+
+    try {
+      List<CategoryModel> list = [];
+      Map<String, dynamic> data = jsonDecode(response.body);
+
+      for (var item in data['categories']) {
+        int id = int.parse(item['idCategory']);
+        String category = item['strCategory'];
+        String description = item['strCategoryDescription'] ?? '';
+        String image = item['strCategoryThumb'] ?? '';
+
+        CategoryModel model = CategoryModel(id: id, category: category, description: description, image: image);
+        list.add(model);
+      }
+      return list;
+    } catch (e) {
+      throw 'Error while decoding response: ${e.toString()}';
     }
   }
 }
