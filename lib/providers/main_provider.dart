@@ -40,5 +40,34 @@ class MainProvider with ChangeNotifier {
         "3 cups",
       ],
     ),
+    MealModel(
+      id: 52919,
+      meal: "Fennel Dauphinoise",
+      category: "Side",
+      area: "French",
+      instructions:
+          "Heat oven to 180C/160C fan/gas 4. Put potatoes, fennel, and garlic in a medium non-stick pan. Pour in milk and double cream, season well and simmer gently, covered, for 10 mins, stirring halfway through, until potatoes are just tender.\r\nDivide the mixture between 2 small (about 150ml) buttered ramekins and scatter with Parmesan. Bake for 40 mins until the potatoes are golden and tender when pierced with a knife. Snip the reserved fennel fronds over before serving.",
+      image: "https://www.themealdb.com/images/media/meals/ytttsv1511798734.jpg",
+      youtube: "https://www.youtube.com/watch?v=tXBzZm2kkh8",
+      tags: ["Pie", "SideDish"],
+      ingredients: [
+        "Potatoes",
+        "Fennel",
+        "Garlic",
+        "Milk",
+        "Double Cream",
+        "Butter",
+        "Parmesan Cheese",
+      ],
+      ingredientMeasures: [
+        "225g",
+        "1 small",
+        "1 clove finely chopped",
+        "75 ml ",
+        "100ml",
+        "For Greasing",
+        "to serve",
+      ],
+    )
   ];
 }
