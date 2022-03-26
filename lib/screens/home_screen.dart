@@ -40,14 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: meals.map((meal) => FoodCard(mealModel: meal)).toList(),
-          // children: [
-          //   FoodCard(
-          //     mealModel: context.watch<MainProvider>().mealModels[0],
-          //   ),
-          //   FoodCard(
-          //     mealModel: context.watch<MainProvider>().mealModels[1],
-          //   )
-          // ],
         ),
       ),
     );
