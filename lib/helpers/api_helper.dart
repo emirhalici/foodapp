@@ -34,7 +34,7 @@ class ApiHelper {
       for (var i = 1; i < 21; i++) {
         String ingredient = item['strIngredient$i'] ?? '';
         String ingredientMeasure = item['strMeasure$i'] ?? '';
-        if (ingredient != '' && ingredientMeasure != '') {
+        if (ingredient != '' && ingredientMeasure != '' && ingredient != 'null' && ingredientMeasure != 'null') {
           ingredients.add(ingredient);
           ingredientMeasures.add(ingredientMeasure);
         }
@@ -107,6 +107,79 @@ class ApiHelper {
         list.add(model);
       }
       return list;
+    } catch (e) {
+      throw 'Error while decoding response: ${e.toString()}';
+    }
+  }
+
+  Future<List<String>> getAllAreas() async {
+    String urlString = 'www.themealdb.com/api/json/v1/$key/list.php?a=list';
+    var url = Uri.parse(urlString);
+    http.Response response = await http.get(url);
+
+    if (response.statusCode != 200) {
+      throw 'Response not found, status code: ${response.statusCode}';
+    }
+
+    try {
+      List<String> list = [];
+      Map<String, dynamic> data = jsonDecode(response.body);
+
+      for (var item in data['meals']) {
+        String area = item['strArea'];
+
+        list.add(area);
+      }
+      return list;
+    } catch (e) {
+      throw 'Error while decoding response: ${e.toString()}';
+    }
+  }
+
+  Future<MealModel> getMealById(int id) async {
+    String urlString = 'www.themealdb.com/api/json/v1/1/lookup.php?i=$id';
+    var url = Uri.parse(urlString);
+    http.Response response = await http.get(url);
+    if (response.statusCode != 200) {
+      throw 'Response not found, status code: ${response.statusCode}';
+    }
+
+    try {
+      Map<String, dynamic> data = jsonDecode(response.body);
+      var item = data['meals'][0];
+      int id = int.parse(item['idMeal']);
+      String meal = item['strMeal'];
+      String category = item['strCategory'];
+      String area = item['strArea'];
+      String instructions = item['strInstructions'];
+      String image = item['strMealThumb'] ?? '';
+      String youtube = item['strYoutube'] ?? '';
+      String tagsStr = item['strTags'] ?? '';
+      List<String> tags = [];
+      tags.addAll(tagsStr.split(','));
+      List<String> ingredients = [];
+      List<String> ingredientMeasures = [];
+      for (var i = 1; i < 21; i++) {
+        String ingredient = item['strIngredient$i'] ?? '';
+        String ingredientMeasure = item['strMeasure$i'] ?? '';
+        if (ingredient != '' && ingredientMeasure != '' && ingredient != 'null' && ingredientMeasure != 'null') {
+          ingredients.add(ingredient);
+          ingredientMeasures.add(ingredientMeasure);
+        }
+      }
+
+      MealModel model = MealModel(
+          id: id,
+          meal: meal,
+          category: category,
+          area: area,
+          instructions: instructions,
+          image: image,
+          youtube: youtube,
+          tags: tags,
+          ingredients: ingredients,
+          ingredientMeasures: ingredientMeasures);
+      return model;
     } catch (e) {
       throw 'Error while decoding response: ${e.toString()}';
     }
