@@ -16,7 +16,7 @@ class FoodCard extends StatelessWidget {
     List<Widget> list = [];
     for (int i = 0; i < mealModel.ingredients.length; i++) {
       list.add(Padding(
-        padding: const EdgeInsets.all(4.0),
+        padding: const EdgeInsets.all(2.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -38,7 +38,7 @@ class FoodCard extends StatelessWidget {
     return ExpandableNotifier(
       child: Expandable(
         collapsed: Padding(
-          padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
+          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
           child: ExpandableButton(
             child: Container(
               decoration: BoxDecoration(
@@ -65,8 +65,8 @@ class FoodCard extends StatelessWidget {
                         children: [
                           ClipRRect(
                             borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(24),
-                              bottomRight: Radius.circular(24),
+                              bottomLeft: Radius.circular(16),
+                              bottomRight: Radius.circular(16),
                               topLeft: Radius.circular(16),
                               topRight: Radius.circular(16),
                             ),
@@ -113,7 +113,7 @@ class FoodCard extends StatelessWidget {
           ),
         ),
         expanded: Padding(
-          padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
+          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
           child: ExpandableButton(
             child: Container(
               decoration: BoxDecoration(
@@ -137,8 +137,8 @@ class FoodCard extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(24),
-                            bottomRight: Radius.circular(24),
+                            bottomLeft: Radius.circular(16),
+                            bottomRight: Radius.circular(16),
                             topLeft: Radius.circular(16),
                             topRight: Radius.circular(16),
                           ),
