@@ -20,15 +20,21 @@ class FoodCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              upperCaseFirstLetter(mealModel.ingredients[i]),
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
+            Flexible(
+              child: Text(
+                upperCaseFirstLetter(mealModel.ingredients[i]),
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.start,
               ),
             ),
-            Text(
-              upperCaseFirstLetter(mealModel.ingredientMeasures[i]),
+            Flexible(
+              child: Text(
+                upperCaseFirstLetter(mealModel.ingredientMeasures[i]),
+                textAlign: TextAlign.end,
+              ),
             ),
           ],
         ),

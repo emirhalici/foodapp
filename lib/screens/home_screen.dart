@@ -16,9 +16,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   void addRandomMeal() async {
-    ApiHelper helper = ApiHelper();
-    MealModel model = await helper.getRandomMeal();
-    context.read<MainProvider>().addMeal(model);
+    try {
+      ApiHelper helper = ApiHelper();
+      MealModel model = await helper.getRandomMeal();
+      context.read<MainProvider>().addMeal(model);
+    } catch (e) {}
   }
 
   @override
